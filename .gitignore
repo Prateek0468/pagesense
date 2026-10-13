@@ -30,4 +30,3 @@ next-env.d.ts
 # Don't pushthe
 data/
 *.csv
-*.txt
