@@ -7,16 +7,27 @@ file tracks the work — must-haves under **Now**, everything else under **Later
 
 In order. Retrieval logic is handcoded; boilerplate glue may be AI-assisted.
 
-- [ ] **Phase 0 — Data prep.** Parse CMU, handle missing genres and summaries,
+- [x] **Phase 0 — Data prep.** Parse CMU, handle missing genres and summaries,
       dedupe by title+author, build the embedding text, save `books.parquet`. Read
       20 rows by hand.
+      _Done: `data/processed/books.parquet` — 16,551 rows × 8 cols; 20 rows reviewed
+      by hand. Carryovers tracked under Phase 1 and Phase 3._
 - [ ] **Phase 1 — Embed and search.** Start with numpy brute force in a notebook,
       then move to Weaviate behind a `VectorStore` interface. Sanity check:
       *"a cozy mystery set in a small village"* returns sensible books.
+    - [ ] **(Carryover from Phase 0)** `embedding_text` runs up to ~58k chars
+          (median 1,653) but MiniLM caps at 256 tokens — decide whether to
+          truncate the summary or chunk before embedding, and record the choice.
 - [ ] **Phase 2 — Evaluation harness.** 10–20 labeled queries, recall@10 and MRR.
       Record the baseline now.
 - [ ] **Phase 3 — Filters.** Genre, year range, and "has full text" (stub until
       Gutenberg matching exists in Phase 8).
+    - [ ] **(Carryover from Phase 0)** `publication_date` arrives in four shapes —
+          `YYYY`, `YYYY-MM`, `YYYY-MM-DD`, and blank — parse to a year integer for
+          the year-range filter.
+    - [ ] **(Carryover from Phase 0)** Decide filter behavior for rows missing the
+          field: 3,717 (22%) have no genres, 2,379 (14%) no author, 5,606 (34%) no
+          date.
 - [ ] **Phase 4 — More like this + shelf blending.** Near-vector search excluding
       the source book; blend 3–5 favorites into one query vector.
 - [ ] **Phase 5 — Hybrid search.** Compare vector / keyword / hybrid with the eval
