@@ -11,6 +11,9 @@ ROOT = Path(__file__).resolve().parents[2]
 INPUT_FILE = ROOT / "data" / "raw" /  "cmu_books" / "booksummaries.txt"
 OUTPUT_FILE = ROOT / "data" / "processed" / "books.parquet"
 
+EMBEDDING_MODEL = "all-MiniLM-L6-v2"
+MAX_SEQ_LENGTH = 256
+
 COLUMNS = [
     "wiki_id",
     "freebase_id",
@@ -61,10 +64,14 @@ def normalize_key(value):
 
 
 def main():
+    from sentence_transformers import SentenceTransformer
+
     if not INPUT_FILE.exists():
         raise FileNotFoundError(
             f"Dataset not found: {INPUT_FILE}"
         )
+
+    tokenizer = SentenceTransformer(EMBEDDING_MODEL).tokenizer
 
     # Parse the seven tab-separated fields.
     df = pd.read_csv(
@@ -112,27 +119,22 @@ def main():
 
     df = df.drop(columns=["_title_key", "_author_key"])
 
-    # Build text that can later be sent to an embedding model.
     def make_embedding_text(row):
-        parts = [f"Title: {row['title']}"]
-
-        if row["author"]:
-            parts.append(f"Author: {row['author']}")
-
-        if row["publication_date"]:
-            parts.append(
-                f"Publication date: {row['publication_date']}"
-            )
-
-        if row["genres"]:
-            parts.append(
-                "Genres: " + ", ".join(row["genres"])
-            )
-
-        if row["summary"]:
-            parts.append(f"Summary: {row['summary']}")
-
-        return "\n".join(parts)
+        author = f" by {row['author']}" if row["author"] else ""
+        genres = f" Genres: {', '.join(row['genres'])}." if row["genres"] else ""
+        head = f"{row['title']}{author}.{genres} "
+        head_tokens = len(tokenizer.encode(head, add_special_tokens=False))
+        budget = max(MAX_SEQ_LENGTH - head_tokens - 2, 0)
+        encoded = tokenizer(
+            row["summary"],
+            add_special_tokens=False,
+            truncation=True,
+            max_length=budget,
+            return_offsets_mapping=True,
+        )
+        offsets = encoded["offset_mapping"]
+        end = offsets[-1][1] if offsets else 0
+        return head + row["summary"][:end]
 
     df["embedding_text"] = df.apply(
         make_embedding_text,

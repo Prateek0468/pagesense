@@ -15,10 +15,11 @@ In order. Retrieval logic is handcoded; boilerplate glue may be AI-assisted.
 - [ ] **Phase 1 — Embed and search.** Start with numpy brute force in a notebook,
       then move to Weaviate behind a `VectorStore` interface. Sanity check:
       *"a cozy mystery set in a small village"* returns sensible books.
-    - [x] **(Carryover from Phase 0)** `embedding_text` runs up to ~58k chars
-          (median 1,653) but MiniLM caps at 256 tokens — decided: explicitly
-          truncate each text to `model.max_seq_length` tokens in the notebook
-          before encoding. If the sanity query behaves poorly, revisit chunking.
+    - [x] **(Carryover from Phase 0)** `embedding_text` ran up to ~58k chars
+          (median 1,653) but MiniLM caps at 256 tokens — fixed in `prepare_data.py`:
+          title/author/genres come first, summary is sliced by token offsets to
+          fill the remaining budget. All rows now fit in 256 tokens; the sanity
+          query returns 9/10 plausible books. Revisit chunking only if recall suffers.
 - [ ] **Phase 2 — Evaluation harness.** 10–20 labeled queries, recall@10 and MRR.
       Record the baseline now.
 - [ ] **Phase 3 — Filters.** Genre, year range, and "has full text" (stub until
