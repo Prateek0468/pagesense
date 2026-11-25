@@ -1,0 +1,698 @@
+{
+  "generated_at": "2026-11-25T15:34:53.761305+00:00",
+  "store": "weaviate",
+  "k": 10,
+  "query_count": 20,
+  "aggregate": {
+    "recall_at_k": 0.7,
+    "mrr": 0.5210317460317461
+  },
+  "per_query": [
+    {
+      "id": "cozy-village-mystery",
+      "query": "a cozy mystery set in a small village",
+      "relevant_ids": [
+        "2074207",
+        "14857283",
+        "6900207",
+        "9553753",
+        "6899604",
+        "6914967",
+        "21844678"
+      ],
+      "retrieved_ids": [
+        "2074207",
+        "23943721",
+        "12089587",
+        "14857283",
+        "6900207",
+        "9553753",
+        "21844678",
+        "6899604",
+        "6914967",
+        "1229351"
+      ],
+      "retrieved_titles": [
+        "The Jungle Pyramid",
+        "The Castle of Adventure",
+        "Irish Stew!",
+        "The Mystery of the Cape Cod Tavern",
+        "The Mysterious Mannequin",
+        "The Kachina Doll Mystery",
+        "Smaller and Smaller Circles",
+        "The Quest of the Missing Map",
+        "The Secret of the Forgotten City",
+        "Where The Wild Things Are"
+      ],
+      "first_hit_rank": 1,
+      "recall": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "totalitarian-farm-satire",
+      "query": "a satirical novel about farm animals and totalitarian politics",
+      "relevant_ids": [
+        "620"
+      ],
+      "retrieved_ids": [
+        "620",
+        "4659671",
+        "4656302",
+        "11541759",
+        "3021563",
+        "632999",
+        "24593043",
+        "21760308",
+        "5870892",
+        "24929476"
+      ],
+      "retrieved_titles": [
+        "Animal Farm",
+        "The Book of the Dun Cow",
+        "Punk Farm",
+        "Snowball's Chance",
+        "The Sheep-Pig",
+        "Animal World",
+        "Freddy and Simon the Dictator",
+        "Animal Spirits: How Human Psychology Drives the Economy, and Why It Matters for Global Capitalism",
+        "Rabbit Hill",
+        "Freddy the Politician"
+      ],
+      "first_hit_rank": 1,
+      "recall": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "violent-dystopian-conditioning",
+      "query": "a dark dystopian story about a violent teenager and behavior conditioning",
+      "relevant_ids": [
+        "843"
+      ],
+      "retrieved_ids": [
+        "12309458",
+        "11423191",
+        "23486677",
+        "1986004",
+        "6046538",
+        "5355319",
+        "1930184",
+        "5225382",
+        "3727530",
+        "12392384"
+      ],
+      "retrieved_titles": [
+        "Random Acts of Senseless Violence",
+        "It's Kind of a Funny Story",
+        "Homeboyz",
+        "Tietam Brown",
+        "Another Day in Paradise",
+        "There's a Boy in the Girls' Bathroom",
+        "It Happened to Nancy: By an Anonymous Teenager",
+        "Doing It",
+        "Night Train",
+        "Danger on Midnight River"
+      ],
+      "first_hit_rank": null,
+      "recall": 0.0,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "hobbit-ring-quest",
+      "query": "a hobbit's journey to reclaim a mountain kingdom with a wizard and a ring",
+      "relevant_ids": [
+        "30292"
+      ],
+      "retrieved_ids": [
+        "30292",
+        "11364514",
+        "29798",
+        "22305105",
+        "27472888",
+        "17691282",
+        "19747669",
+        "15773551",
+        "25888432",
+        "5261893"
+      ],
+      "retrieved_titles": [
+        "The Hobbit",
+        "The Lord of the Rings",
+        "The Lord of the Rings",
+        "Merlin's Ring",
+        "The Fellowship of the Ring",
+        "The Disappearing Dwarf",
+        "The Dragon Lord",
+        "The Last Ringbearer",
+        "Swords Against Wizardry",
+        "The Winter King"
+      ],
+      "first_hit_rank": 1,
+      "recall": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "desert-fox-prince",
+      "query": "a prince learns about love and loss in the desert from a fox",
+      "relevant_ids": [
+        "63425"
+      ],
+      "retrieved_ids": [
+        "17435050",
+        "22327821",
+        "30819547",
+        "20819671",
+        "13349393",
+        "9210146",
+        "10643911",
+        "1383951",
+        "63425",
+        "16833103"
+      ],
+      "retrieved_titles": [
+        "Firebird",
+        "The Coachman Rat",
+        "The Lad and the Lion",
+        "Near to the Wild Heart",
+        "The Murderer is a Fox",
+        "The Paper Bag Princess",
+        "The Book of Sorrows",
+        "Fool's Errand",
+        "The Little Prince",
+        "A Posse of Princesses"
+      ],
+      "first_hit_rank": 9,
+      "recall": 1.0,
+      "reciprocal_rank": 0.1111111111111111
+    },
+    {
+      "id": "spider-piglet-barn",
+      "query": "a spider saves a piglet in a rural barn",
+      "relevant_ids": [
+        "302301"
+      ],
+      "retrieved_ids": [
+        "10309074",
+        "302301",
+        "5317770",
+        "16197210",
+        "19781082",
+        "3211116",
+        "19422909",
+        "5265853",
+        "4474012",
+        "4937163"
+      ],
+      "retrieved_titles": [
+        "The Tale of Pigling Bland",
+        "Charlotte's Web",
+        "The True Story of the Three Little Pigs",
+        "The Original Adventures of Hank the Cowdog",
+        "Diary of a Spider",
+        "The Book of Three",
+        "Piggie Pie",
+        "Pig Island",
+        "The Tale of Mrs. Tittlemouse",
+        "The Tale of Johnny Town-Mouse"
+      ],
+      "first_hit_rank": 2,
+      "recall": 1.0,
+      "reciprocal_rank": 0.5
+    },
+    {
+      "id": "walled-garden-renewal",
+      "query": "a neglected girl finds friendship and renewal in a hidden garden",
+      "relevant_ids": [
+        "410873"
+      ],
+      "retrieved_ids": [
+        "410873",
+        "3796192",
+        "32455986",
+        "15130869",
+        "5426763",
+        "23989793",
+        "9343751",
+        "11278597",
+        "11821430",
+        "32249586"
+      ],
+      "retrieved_titles": [
+        "The Secret Garden",
+        "Missing May",
+        "The Painted Garden",
+        "What Was Lost",
+        "Another Girl, Another Planet",
+        "A Sensible Life",
+        "The Girl Next Door",
+        "The Last Summer",
+        "Girl, Missing",
+        "Silence"
+      ],
+      "first_hit_rank": 1,
+      "recall": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "civil-war-sisters",
+      "query": "a family of sisters growing up during the American Civil War",
+      "relevant_ids": [
+        "8595912"
+      ],
+      "retrieved_ids": [
+        "23969789",
+        "21609151",
+        "12838145",
+        "20971600",
+        "3241257",
+        "315122",
+        "20952962",
+        "9800816",
+        "18748329",
+        "4476944"
+      ],
+      "retrieved_titles": [
+        "Sisters",
+        "The Two Sisters",
+        "Sarny",
+        "Aunt Jane's Nieces at Work",
+        "His Family",
+        "Sartoris",
+        "Aunt Jane's Nieces and Uncle John",
+        "Scarlet Sister Mary",
+        "The Rebels",
+        "Sister Alice"
+      ],
+      "first_hit_rank": null,
+      "recall": 0.0,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "created-creature-gothic",
+      "query": "a gothic novel about a scientist who creates and abandons a living creature",
+      "relevant_ids": [
+        "18580673"
+      ],
+      "retrieved_ids": [
+        "3557621",
+        "9039952",
+        "18580673",
+        "1800897",
+        "8494432",
+        "3765583",
+        "16369910",
+        "10621004",
+        "2194450",
+        "9008683"
+      ],
+      "retrieved_titles": [
+        "Walter",
+        "The House of the Wolf",
+        "Frankenstein",
+        "Jack Faust",
+        "Dead and Alive",
+        "The Dying Animal",
+        "The Crystal Horde",
+        "Wolf Moon",
+        "Reliquary",
+        "Necropolis"
+      ],
+      "first_hit_rank": 3,
+      "recall": 1.0,
+      "reciprocal_rank": 0.3333333333333333
+    },
+    {
+      "id": "vampire-count-england",
+      "query": "a Victorian vampire count who moves to England and hunts a young woman",
+      "relevant_ids": [
+        "7923"
+      ],
+      "retrieved_ids": [
+        "24021398",
+        "28911950",
+        "17858918",
+        "4114054",
+        "24021324",
+        "22667032",
+        "14063233",
+        "9532662",
+        "28924652",
+        "4081329"
+      ],
+      "retrieved_titles": [
+        "Vampire Zero",
+        "Soulless",
+        "Yellow Fog",
+        "Midnight Predator",
+        "23 Hours",
+        "Eighth Grade Bites",
+        "Anno Dracula",
+        "Those Who Hunt the Night",
+        "Blameless",
+        "Allies of the Night"
+      ],
+      "first_hit_rank": null,
+      "recall": 0.0,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "holmes-moors-manor",
+      "query": "Sherlock Holmes investigates a cursed manor on the moors",
+      "relevant_ids": [
+        "30280"
+      ],
+      "retrieved_ids": [
+        "5715433",
+        "31407593",
+        "30280",
+        "224500",
+        "29505045",
+        "31824386",
+        "1172386",
+        "8444109",
+        "22443499",
+        "160106"
+      ],
+      "retrieved_titles": [
+        "Sherlock Holmes ~ The Way of All Flesh",
+        "Sherlock Holmes and the Man from Hell",
+        "The Hound of the Baskervilles",
+        "A Study in Scarlet",
+        "Red Leech",
+        "Young Sherlock Holmes: Black Ice",
+        "The Valley of Fear",
+        "Erasing Sherlock",
+        "An Excellent Mystery",
+        "The Red House Mystery"
+      ],
+      "first_hit_rank": 3,
+      "recall": 1.0,
+      "reciprocal_rank": 0.3333333333333333
+    },
+    {
+      "id": "pirates-buried-map",
+      "query": "a boy's adventure with pirates, a buried map, and a one-legged sailor",
+      "relevant_ids": [
+        "167963"
+      ],
+      "retrieved_ids": [
+        "3380081",
+        "3826722",
+        "7137592",
+        "4120326",
+        "2904605",
+        "3729322",
+        "4435553",
+        "20013818",
+        "6899604",
+        "20909788"
+      ],
+      "retrieved_titles": [
+        "Peter and the Starcatchers",
+        "The Coral Island",
+        "The Pirate",
+        "The Island",
+        "Peter Duck",
+        "The Pirates! in an Adventure with Scientists",
+        "Two Years' Vacation",
+        "The Lonely Voyage",
+        "The Quest of the Missing Map",
+        "The Island of Adventure"
+      ],
+      "first_hit_rank": null,
+      "recall": 0.0,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "around-world-eighty-days",
+      "query": "a wager to travel around the world in eighty days by train and steamer",
+      "relevant_ids": [
+        "42609"
+      ],
+      "retrieved_ids": [
+        "42609",
+        "30869162",
+        "7580125",
+        "3724608",
+        "2267760",
+        "17905402",
+        "27570567",
+        "24035579",
+        "17042961",
+        "59782"
+      ],
+      "retrieved_titles": [
+        "Around the World in Eighty Days",
+        "The Scheme for Full Employment",
+        "John Henry Days",
+        "The Way West",
+        "Death of a Train",
+        "Tom Swift and His Electric Locomotive",
+        "Pictures from the Water Trade",
+        "The Depths of Time",
+        "The World Below",
+        "Job: A Comedy of Justice"
+      ],
+      "first_hit_rank": 1,
+      "recall": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "time-travel-far-future",
+      "query": "a machine that lets a traveller visit the far future",
+      "relevant_ids": [
+        "29834"
+      ],
+      "retrieved_ids": [
+        "29834",
+        "8800858",
+        "5360089",
+        "10361574",
+        "17042961",
+        "24035579",
+        "1126435",
+        "29872977",
+        "3786846",
+        "21251990"
+      ],
+      "retrieved_titles": [
+        "The Time Machine",
+        "The Great Time Machine Hoax",
+        "The Last Resort",
+        "The Last Day of Creation",
+        "The World Below",
+        "The Depths of Time",
+        "Voyage from Yesteryear",
+        "How to Live Safely in a Science Fictional Universe",
+        "Gateway",
+        "The Accidental Time Machine"
+      ],
+      "first_hit_rank": 1,
+      "recall": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "submarine-giant-squid",
+      "query": "a captain explores the ocean in a submarine and fights a giant squid",
+      "relevant_ids": [
+        "38093"
+      ],
+      "retrieved_ids": [
+        "16865147",
+        "8329974",
+        "26859770",
+        "14662428",
+        "17152401",
+        "3104028",
+        "25364599",
+        "15967269",
+        "13456832",
+        "13755557"
+      ],
+      "retrieved_titles": [
+        "The Loch",
+        "USS Seawolf",
+        "A Captain's Duty",
+        "To Kill the Potemkin",
+        "The Sunken World",
+        "The Secret Sharer",
+        "Tentacles",
+        "Tom Swift and His Submarine Boat",
+        "Dick Sand, A Captain at Fifteen",
+        "Sea Change"
+      ],
+      "first_hit_rank": null,
+      "recall": 0.0,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "children-castle-adventure",
+      "query": "children uncover a mystery in a castle during a summer adventure",
+      "relevant_ids": [
+        "23943721"
+      ],
+      "retrieved_ids": [
+        "23943721",
+        "3151394",
+        "4541568",
+        "28771603",
+        "20113500",
+        "30266018",
+        "26013918",
+        "6501961",
+        "6558309",
+        "7337505"
+      ],
+      "retrieved_titles": [
+        "The Castle of Adventure",
+        "The Enchanted Castle",
+        "Castle",
+        "The House of Arden",
+        "Five on Finniston Farm",
+        "The Deadly Dungeon",
+        "Secret Book Club",
+        "The Stone Idol",
+        "Castle in the Air",
+        "Eleven Kids, One Summer"
+      ],
+      "first_hit_rank": 1,
+      "recall": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "old-fisherman-marlin",
+      "query": "a sparse novella about an old fisherman and a giant marlin",
+      "relevant_ids": [
+        "161502"
+      ],
+      "retrieved_ids": [
+        "161502",
+        "19809558",
+        "8730025",
+        "3319760",
+        "19959644",
+        "21571664",
+        "8608985",
+        "4844614",
+        "1444797",
+        "5569380"
+      ],
+      "retrieved_titles": [
+        "The Old Man and the Sea",
+        "Calm at Sunset, Calm at Dawn",
+        "Gould's Book of Fish",
+        "The Marlows and the Traitor",
+        "A Book on Angling",
+        "The River Why",
+        "The Wreck of the Zephyr",
+        "Henry and Ribsy",
+        "Peter Simple",
+        "Big Two-Hearted River"
+      ],
+      "first_hit_rank": 1,
+      "recall": 1.0,
+      "reciprocal_rank": 1.0
+    },
+    {
+      "id": "war-satire-yossarian",
+      "query": "a satirical war novel about an airman named Yossarian",
+      "relevant_ids": [
+        "55469"
+      ],
+      "retrieved_ids": [
+        "2160253",
+        "17647828",
+        "9471253",
+        "17725634",
+        "8529914",
+        "1935756",
+        "9210661",
+        "16845793",
+        "6433374",
+        "4002070"
+      ],
+      "retrieved_titles": [
+        "The War in the Air",
+        "Tom Swift and His War Tank",
+        "Enemy Coast Ahead",
+        "Tom Swift and His Air Scout",
+        "The Guns of Navarone",
+        "The Great War: American Front",
+        "What's Become of Waring",
+        "Hello Sailor",
+        "The Betrayers",
+        "Warlord of the Air"
+      ],
+      "first_hit_rank": null,
+      "recall": 0.0,
+      "reciprocal_rank": 0.0
+    },
+    {
+      "id": "magical-realism-macondo",
+      "query": "a magical-realism family saga in the town of Macondo",
+      "relevant_ids": [
+        "654705"
+      ],
+      "retrieved_ids": [
+        "6744002",
+        "358867",
+        "11084310",
+        "2296365",
+        "10796764",
+        "1253200",
+        "654705",
+        "18713342",
+        "13817412",
+        "5884004"
+      ],
+      "retrieved_titles": [
+        "The Magic City",
+        "Caddie Woodlawn",
+        "The Troublesome Offspring of Cardinal Guzman",
+        "The 35th of May, or Conrad's Ride to the South Seas",
+        "Hombres de ma\u00edz",
+        "The Grandmother",
+        "One Hundred Years of Solitude",
+        "Practical Magic",
+        "Magic Mirror",
+        "Leaf Storm"
+      ],
+      "first_hit_rank": 7,
+      "recall": 1.0,
+      "reciprocal_rank": 0.14285714285714285
+    },
+    {
+      "id": "wardrobe-winter-world",
+      "query": "a lion, a witch, and a wardrobe open a portal to a winter world",
+      "relevant_ids": [
+        "242130"
+      ],
+      "retrieved_ids": [
+        "242130",
+        "30234770",
+        "13060654",
+        "9263595",
+        "60878",
+        "5763542",
+        "12354773",
+        "28271374",
+        "20008950",
+        "536586"
+      ],
+      "retrieved_titles": [
+        "The Lion, the Witch and the Wardrobe",
+        "Witch and Wizard: The Gift",
+        "A Lion Among Men",
+        "The Avalon Collection",
+        "The Lion in Winter",
+        "The Wizard of Oz",
+        "Elfsorrow",
+        "World of Warcraft: Beyond the Dark Portal",
+        "The Wicked Witch of Oz",
+        "The Adventure of the Lion's Mane"
+      ],
+      "first_hit_rank": 1,
+      "recall": 1.0,
+      "reciprocal_rank": 1.0
+    }
+  ]
+}

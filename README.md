@@ -86,11 +86,43 @@ AI-assisted.
 
 ## Evaluation
 
-The harness in `eval/` scores retrieval with **recall@10** and **MRR** against
-labeled queries, and is reused to compare vector vs. keyword vs. hybrid search and
-to catch regressions.
+`eval/labeled_queries.py` holds 20 hand-labeled queries. Each query lists the
+wiki ids that count as relevant. `eval/run_eval.py` embeds the corpus, searches
+one `VectorStore`, and reports **recall@k** (fraction of relevant books found in
+the top k) and **MRR** (mean reciprocal rank of the first relevant hit).
 
-_Results table lands in Phase 9._
+Run the brute-force baseline from the repo root:
+
+```bash
+source .venv/bin/activate
+python eval/run_eval.py --store brute \
+  --embedding-cache eval/results/embedding_cache.npz
+```
+
+The `--embedding-cache` flag is optional but saves ~50 seconds on repeat runs;
+delete the cache after regenerating `books.parquet`. The Weaviate row below was
+produced with Docker running (`docker compose up -d`); `WeaviateStore` connects
+to `localhost:8080` and `localhost:50051`:
+
+```bash
+python eval/run_eval.py --store weaviate \
+  --embedding-cache eval/results/embedding_cache.npz
+```
+
+Each run writes `eval/results/<store>.json` with the aggregate scores and
+per-query retrieved ids. The same harness will be reused in Phase 5 to compare
+vector, keyword, and hybrid search.
+
+| Store       | recall@10 | MRR    |
+| ----------- | --------- | ------ |
+| Brute force | 0.7000    | 0.5210 |
+| Weaviate    | 0.7000    | 0.5210 |
+
+Both stores score identically on the Phase 2 labels. Their top-10 lists differ
+only at rank 10 for `wardrobe-winter-world`, so the named-vector Weaviate path
+is effectively equivalent for these queries. The six zero-recall queries point
+to corpus/label issues (truncated summaries or alternate editions), not store
+divergence; revisit them only if later phases need a stronger baseline.
 
 ## Getting started
 
@@ -195,7 +227,8 @@ Run these from the repo root.
    docker compose down -v   # delete data
    ```
 
-Passing steps 5–7 completes Phase 1; tick it in `backlog.md`. Phase 2 is next.
+Phase 1 parity, the Phase 2 baseline, and the brute-vs-Weaviate comparison are
+recorded above. Remaining Phase 5 work is keyword/hybrid evaluation.
 
 ## Attribution
 

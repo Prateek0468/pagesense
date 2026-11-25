@@ -12,18 +12,24 @@ In order. Retrieval logic is handcoded; boilerplate glue may be AI-assisted.
       20 rows by hand.
       _Done: `data/processed/books.parquet` — 16,551 rows × 8 cols; 20 rows reviewed
       by hand. Carryovers tracked under Phase 1 and Phase 3._
-- [ ] **Phase 1 — Embed and search.** Start with numpy brute force in a notebook,
+- [x] **Phase 1 — Embed and search.** Start with numpy brute force in a notebook,
       then move to Weaviate behind a `VectorStore` interface. Sanity check:
       *"a cozy mystery set in a small village"* returns sensible books.
-    - [ ] Run `backend/scripts/compare_stores.py` against local Docker Weaviate;
-          tick Phase 1 when parity passes.
+    - [x] Run `backend/scripts/compare_stores.py` against local Docker Weaviate;
+          parity passed.
     - [x] **(Carryover from Phase 0)** `embedding_text` ran up to ~58k chars
           (median 1,653) but MiniLM caps at 256 tokens — fixed in `prepare_data.py`:
           title/author/genres come first, summary is sliced by token offsets to
           fill the remaining budget. All rows now fit in 256 tokens; the sanity
           query returns 9/10 plausible books. Revisit chunking only if recall suffers.
-- [ ] **Phase 2 — Evaluation harness.** 10–20 labeled queries, recall@10 and MRR.
+- [x] **Phase 2 — Evaluation harness.** 10–20 labeled queries, recall@10 and MRR.
       Record the baseline now.
+    - [x] Write labeled queries with verified ids in `eval/labeled_queries.py`.
+    - [x] Implement `eval/run_eval.py` to score any `VectorStore` with recall@k
+          and MRR, and save results under `eval/results/`.
+    - [x] Run the brute-force baseline and save `eval/results/brute.json`
+          (recall@10 0.7000, MRR 0.5210).
+    - [x] Add the baseline numbers to the README results table.
 - [ ] **Phase 3 — Filters.** Genre, year range, and "has full text" (stub until
       Gutenberg matching exists in Phase 8).
     - [ ] **(Carryover from Phase 0)** `publication_date` arrives in four shapes —
@@ -36,6 +42,8 @@ In order. Retrieval logic is handcoded; boilerplate glue may be AI-assisted.
       the source book; blend 3–5 favorites into one query vector.
 - [ ] **Phase 5 — Hybrid search.** Compare vector / keyword / hybrid with the eval
       harness, so the comparison is a number.
+    - [x] Run `eval/run_eval.py --store weaviate` with Docker running and save
+          `eval/results/weaviate.json`.
 - [ ] **Phase 6 — FastAPI + Next.js UI.** Backend endpoints first, then the UI.
 - [ ] **Phase 7 — Corpus-level RAG.** Retrieve summaries, answer with cited books.
       Add the first RAG eval questions.
