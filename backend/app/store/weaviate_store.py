@@ -16,6 +16,7 @@ from weaviate.classes.query import Filter, MetadataQuery
 from app.store.base import VectorStore
 
 DEFAULT_COLLECTION = "Book"
+VECTOR_NAME = "default"
 PROPERTY_NAMES = [
     "source_id",
     "title",
@@ -59,9 +60,10 @@ class WeaviateStore(VectorStore):
                 # No vectorizer: vectors come from embed_documents(). Cosine
                 # distance matches the normalized dot product of the other store.
                 vector_config=Configure.Vectors.self_provided(
-                    vector_index_config=Configure.VectorIndex.flat(
+                    name=VECTOR_NAME,
+                    vector_index_config=Configure.VectorIndex.hnsw(
                         distance_metric=VectorDistances.COSINE
-                    )
+                    ),
                 ),
             )
         self._collection = self._client.collections.use(self._collection_name)
@@ -103,10 +105,19 @@ class WeaviateStore(VectorStore):
                 batch.add_object(
                     properties=self._properties(document),
                     uuid=object_uuid,
-                    vector=vector.tolist(),
+                    vector={VECTOR_NAME: vector.tolist()},
                 )
-            if batch.number_errors > 0:
-                raise RuntimeError(f"Weaviate batch reported {batch.number_errors} errors")
+
+        # The batch flushes on context exit, so errors are only complete here.
+        if batch.number_errors > 0:
+            messages = "; ".join(
+                failure.message for failure in batch.failed_objects[:3]
+            )
+            raise RuntimeError(
+                f"Weaviate batch reported {batch.number_errors} errors: {messages}"
+            )
+
+        self._collection.batch.wait_for_vector_indexing()
 
         self.dimension = vectors.shape[1]
 
@@ -135,6 +146,7 @@ class WeaviateStore(VectorStore):
             near_vector=query.tolist(),
             limit=k,
             filters=filters,
+            target_vector=VECTOR_NAME,
             return_metadata=MetadataQuery(distance=True),
             return_properties=PROPERTY_NAMES,
         )
@@ -160,6 +172,56 @@ class WeaviateStore(VectorStore):
             )
         return results
 
+    def count(self) -> int:
+        return self._collection.aggregate.over_all(total_count=True).total_count or 0
+
+    def diagnostics(self) -> dict[str, Any]:
+        config = self._collection.config.get()
+        named_configs = getattr(config, "vector_config", None)
+        named_config = (
+            named_configs.get(VECTOR_NAME)
+            if isinstance(named_configs, dict)
+            else None
+        )
+        index_config = getattr(named_config, "vector_index_config", None) or getattr(
+            config, "vector_index_config", None
+        )
+        distance = getattr(index_config, "distance_metric", None) or getattr(
+            index_config, "distance", None
+        )
+
+        sample = self._collection.query.fetch_objects(limit=1, include_vector=True)
+        raw_vector = sample.objects[0].vector if sample.objects else None
+        vector_keys = sorted(raw_vector.keys()) if isinstance(raw_vector, dict) else []
+        vector = raw_vector
+        if isinstance(vector, dict):
+            vector = vector.get(VECTOR_NAME) or next(iter(vector.values()), None)
+
+        self_query_objects = 0
+        if vector is not None:
+            probe = self._collection.query.near_vector(
+                near_vector=vector,
+                limit=1,
+                target_vector=VECTOR_NAME,
+                return_metadata=MetadataQuery(distance=True),
+            )
+            self_query_objects = len(probe.objects)
+
+        return {
+            "vector_names": vector_keys,
+            "vector_index_type": str(
+                getattr(named_config, "vector_index_type", None)
+                or getattr(config, "vector_index_type", None)
+            ),
+            "distance_metric": str(distance),
+            "vectorizer": str(
+                getattr(named_config, "vectorizer", None)
+                or getattr(config, "vectorizer", None)
+            ),
+            "sample_vector_length": len(vector) if vector is not None else 0,
+            "self_query_objects": self_query_objects,
+        }
+
     def delete(self, document_id: str) -> None:
         self._collection.data.delete_by_id(uuid=self._uuid_for(document_id))
 
@@ -171,9 +233,23 @@ class WeaviateStore(VectorStore):
             "source_id": str(document["id"]),
             "title": str(document.get("title", "")),
             "author": str(document.get("author", "")),
-            "genres": [str(genre) for genre in document.get("genres") or []],
+            "genres": self._genres(document.get("genres")),
             "publication_date": str(document.get("publication_date", "")),
         }
+
+    @staticmethod
+    def _genres(value: Any) -> list[str]:
+        if value is None:
+            return []
+        if isinstance(value, (float, np.floating)) and np.isnan(value):
+            return []
+        if isinstance(value, np.ndarray):
+            value = value.tolist()
+        elif isinstance(value, str):
+            value = [value]
+        elif not isinstance(value, (list, tuple, set)):
+            value = [value]
+        return [str(genre) for genre in value]
 
     @staticmethod
     def _uuid_for(document_id: str) -> uuid.UUID:

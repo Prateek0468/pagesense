@@ -15,6 +15,8 @@ In order. Retrieval logic is handcoded; boilerplate glue may be AI-assisted.
 - [ ] **Phase 1 — Embed and search.** Start with numpy brute force in a notebook,
       then move to Weaviate behind a `VectorStore` interface. Sanity check:
       *"a cozy mystery set in a small village"* returns sensible books.
+    - [ ] Run `backend/scripts/compare_stores.py` against local Docker Weaviate;
+          tick Phase 1 when parity passes.
     - [x] **(Carryover from Phase 0)** `embedding_text` ran up to ~58k chars
           (median 1,653) but MiniLM caps at 256 tokens — fixed in `prepare_data.py`:
           title/author/genres come first, summary is sliced by token offsets to
